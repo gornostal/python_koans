@@ -18,6 +18,9 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
+    if a <= 0 or b <= 0 or c <= 0:
+        raise TriangleError
+
     if a == b == c:
         return 'equilateral'
     elif a == b or b == c or c == a:
