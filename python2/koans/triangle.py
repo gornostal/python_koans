@@ -21,6 +21,11 @@ def triangle(a, b, c):
     if a <= 0 or b <= 0 or c <= 0:
         raise TriangleError
 
+    ab = sorted([a,b,c])
+    max = ab.pop()
+    if sum(ab) <= max:
+        raise TriangleError
+
     if a == b == c:
         return 'equilateral'
     elif a == b or b == c or c == a:
