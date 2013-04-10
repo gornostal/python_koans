@@ -92,16 +92,16 @@ class AboutWithStatements(Koan):
         return count
 
     def test_counting_lines2(self):
-        self.assertEqual(__, self.count_lines2("example_file.txt"))
+        self.assertEqual(4, self.count_lines2("example_file.txt"))
 
     # ------------------------------------------------------------------
 
     def find_line2(self, file_name):
-        # Rewrite find_line using the Context Manager.
-        pass
+        with self.FileContextManager(file_name) as f:
+            return (line for line in f.readlines() if re.search('e', line)).next()
 
     def test_finding_lines2(self):
-        self.assertEqual(__, self.find_line2("example_file.txt"))
+        self.assertEqual("test\n", self.find_line2("example_file.txt"))
         self.assertNotEqual(None, self.find_line2("example_file.txt"))
 
     # ------------------------------------------------------------------
@@ -114,4 +114,4 @@ class AboutWithStatements(Koan):
             return count
 
     def test_open_already_has_its_own_built_in_context_manager(self):
-        self.assertEqual(__, self.count_lines3("example_file.txt"))
+        self.assertEqual(4, self.count_lines3("example_file.txt"))
