@@ -26,7 +26,7 @@ class Proxy(object):
         self._obj = target_object
 
     def messages(self):
-        return object.__getattribute__(self, 'logs')
+        return self.logs
 
     def was_called(self, name):
         return name in self.messages()
@@ -39,7 +39,7 @@ class Proxy(object):
             return object.__getattribute__(self, attrname)
         else:
             self.logs.append(attrname)
-            return object.__getattribute__((object.__getattribute__(self, '_obj')), attrname)
+            return object.__getattribute__(object.__getattribute__(self, '_obj'), attrname)
 
     def __setattr__(self, name, value):
         if hasattr(self, '_obj'):
